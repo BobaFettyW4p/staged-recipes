@@ -1,0 +1,41 @@
+{% set name = "gutenbergPasswordGenerator" %}
+{% set version = "0.0.7" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/gutenbergPasswordGenerator-{{ version }}.tar.gz
+  sha256: a3977667f5fef080a4fc9fa12eaa0a0fde21287730a21d1be999913ffc9fb35f
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv
+  number: 0
+
+requirements:
+  host:
+    - python >=3.6
+    - pip
+  run:
+    - python >=3.6
+    - gutenbergpy ==0.3.4
+
+test:
+  imports:
+    - src
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://pypi.org/project/gutenbergPasswordGenerator/
+  summary: Python library to generate passwords using the text of classic novels
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - BobaFettyW4p
